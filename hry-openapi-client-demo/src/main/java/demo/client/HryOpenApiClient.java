@@ -116,7 +116,7 @@ public class HryOpenApiClient {
     }
 
     public String getDailyTaskList(String hryId , String token) {
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
 
         try{
             params.put("hryId", hryId);
@@ -129,13 +129,13 @@ public class HryOpenApiClient {
         return post(params);
     }
 
-    String post(Map<String, String> params) {
+    String post(Map<String, Object> params) {
         String basePath = "/";
         URIBuilder builder = new URIBuilder().setScheme("https")
                 .setHost(host)
                 .setPath(basePath + API_PATH);
         // clear the params with empty value
-        Map<String, String> trimmedParams = new HashMap<>();
+        Map<String, Object> trimmedParams = new HashMap<>();
         for (String key: params.keySet()) {
             if (params.get(key) != null) {
                 trimmedParams.put(key, params.get(key));
@@ -172,14 +172,25 @@ public class HryOpenApiClient {
         }
     }
 
-    void addRequiredParams(String method, String path, Map<String, String> params, String apiKey, String apiSecret) {
+    
+    void addRequiredParams(String method, String path, Map<String, Object> params, String apiKey, String apiSecret) {
         params.put("key", apiKey);
         String ts = String.valueOf(System.currentTimeMillis());
         params.put("ts", ts);
-        String sig = getSig(method, path, apiSecret, params);
+        
+        Map<String, String> sigMap = new HashMap<>();
+        for (String key : params.keySet()) {
+            if(params.get(key) instanceof  String){
+                sigMap.put(key, params.get(key).toString());
+            } else
+                sigMap.put(key, JSON.toJSONString(params.get(key)));
+        }
+        
+        
+        String sig = getSig(method, path, apiSecret, sigMap);
         params.put("sig", sig);
     }
-
+    
     String getSig(String method, String path, String apiSecret, Map<String, String> params) {
         StringBuilder sb = new StringBuilder();
         Set<String> keySet = new TreeSet<>(params.keySet());
