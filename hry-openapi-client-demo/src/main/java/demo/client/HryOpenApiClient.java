@@ -27,9 +27,10 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import demo.encrypt.Base64;
+import demo.util.JsonUtils;
 
 /**
  * @author jiankuan
@@ -147,7 +148,7 @@ public class HryOpenApiClient {
             URI uri = builder.build();
             RequestBuilder requestBuilder = RequestBuilder.post();
             requestBuilder.setUri(uri);
-            StringEntity se = new StringEntity(JSON.toJSONString(trimmedParams),"UTF-8");
+            StringEntity se = new StringEntity(JsonUtils.obj2JsonString(trimmedParams),"UTF-8");
             se.setContentType("application/json");
             requestBuilder.setEntity(se);
             HttpUriRequest request = requestBuilder.build();
@@ -177,13 +178,21 @@ public class HryOpenApiClient {
         params.put("key", apiKey);
         String ts = String.valueOf(System.currentTimeMillis());
         params.put("ts", ts);
-        
+
+        // 计算签名时把非string对象转成json 字符串
+        /**
+         * 为了保证签名与服务端一致
+         * 1.使用 jackson
+         * 2.配置以下两项,保证解析顺序
+         * objectMapper.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+         * objectMapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
+         */
         Map<String, String> sigMap = new HashMap<>();
         for (String key : params.keySet()) {
             if(params.get(key) instanceof  String){
                 sigMap.put(key, params.get(key).toString());
             } else
-                sigMap.put(key, JSON.toJSONString(params.get(key)));
+                sigMap.put(key, JsonUtils.obj2JsonString(params.get(key)));
         }
         
         
