@@ -122,7 +122,7 @@ public class HryOpenApiClient {
         try{
             params.put("hryId", hryId);
             params.put("token", token);
-            params.put("serviceName", "OssGetDailyTaskApply");
+            params.put("serviceName", "getDailyTaskList");
         } catch (Exception e){
             e.printStackTrace();
         }
