@@ -11,7 +11,7 @@ import org.apache.commons.cli.*;
 
 /**
  * vm:
- * -Djavax.net.ssl.trustStore=hry-openapi-client-demo/certs/jssecacerts -Djavax.net.ssl.trustStorePassword=changeit
+ * -Djavax.net.ssl.trustStore=certs/jssecacerts -Djavax.net.ssl.trustStorePassword=changeit
  * args:
  * -host zopenapi.hairongyi.com:443 -key abc1 -secret 123 -keystore certs/client1.p12 -keypass 123456 -keytype PKCS12
  */
