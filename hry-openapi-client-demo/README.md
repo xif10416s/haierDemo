@@ -14,6 +14,6 @@
 * 联系海融易 申请 测试 key和secret ， 和客户端证书client1.p12
 * 将端证书client1.p12放入certs 目录
 * 运行MainApp
-   * 设置vm参数 ：  -Djavax.net.ssl.trustStore= certs/jssecacerts -Djavax.net.ssl.trustStorePassword=changeit
+   * 设置vm参数 ：  -Djavax.net.ssl.trustStore= certs/jssecacerts -Djavax.net.ssl.trustStorePassword=changeit 或者 把这文件 hry-openapi-client-demo/certs/jssecacerts 复制到 使用 jre/lib/security目录下
    * 设置program参数： -host zopenapi.hairongyi.com:443 -key {申请的key} -secret {申请的secret} -keystore certs/client1.p12 -keypass 123456 -keytype PKCS12
    *  run MainApp的main方法 
