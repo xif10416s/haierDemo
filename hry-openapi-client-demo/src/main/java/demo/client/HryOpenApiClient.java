@@ -222,13 +222,13 @@ public class HryOpenApiClient {
             SecretKeySpec secret = new SecretKeySpec(apiSecret.getBytes(), HMAC_SHA1_ALGORITHM);
             Mac mac = Mac.getInstance(HMAC_SHA1_ALGORITHM);
             mac.init(secret);
-            byte[] hmac = mac.doFinal(unifiedString.getBytes()); // UTF8
+            byte[] hmac = mac.doFinal(unifiedString.getBytes("UTF-8")); // UTF8
 
             // base64 encode the hmac
             String sig = Base64.getEncoder().encodeToString(hmac);
             logger.debug("signature: " + sig);
             return sig;
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
