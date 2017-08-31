@@ -17,3 +17,30 @@
    * 设置vm参数 ：  -Djavax.net.ssl.trustStore= certs/jssecacerts -Djavax.net.ssl.trustStorePassword=changeit 或者 把这文件 hry-openapi-client-demo/certs/jssecacerts 复制到 使用 jre/lib/security目录下
    * 设置program参数： -host zopenapi.hairongyi.com:443 -key {申请的key} -secret {申请的secret} -keystore certs/client1.p12 -keypass 123456 -keytype PKCS12
    *  run MainApp的main方法 
+   
+   
+## 注点意
+*  请求参数的值是Object类型，Map<String, Object> params = new HashMap<>();
+
+###  List<String> 的传入
+```
+     params.put("key",new String[]{"a","b"}
+     or
+     List<String> list = new ArrayList();
+     list.add("a");
+     list.add("b")；
+     params.put("key",list)
+```
+
+###  List<Object> 是一个对象的list
+```
+   List<Map<String,Object>> list = new ArrayList();
+   Map<String,Object> oneItem = new HashMap(String,Object);
+   oneItem.put("key1",value1);
+   oneItem.put("key2",value2);
+   ...
+   list.add(oneItem)
+   ....
+   params.put("key",list)
+```
+
