@@ -18,6 +18,10 @@
    * 设置program参数： -host zopenapi.hairongyi.com:443 -key {申请的key} -secret {申请的secret} -keystore certs/client1.p12 -keypass 123456 -keytype PKCS12
    *  run MainApp的main方法 
    
+## 环境说明
+* 测试环境 host c1openapi.hairongyi.com:443
+* 准生产环境 host zopenapi.hairongyi.com:443
+* 生产环境 host openapi.hairongyi.com:443   
    
 ## 注点意
 *  请求参数的值是Object类型，Map<String, Object> params = new HashMap<>();
