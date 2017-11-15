@@ -18,6 +18,10 @@
    * 设置program参数： -host zopenapi.hairongyi.com:443 -key {申请的key} -secret {申请的secret} -keystore certs/client1.p12 -keypass 123456 -keytype PKCS12
    *  run MainApp的main方法 
    
+## 运行环境要求
+* jdk1.7 以上
+* jdk1.6 需要自行更改https的ssl初始化
+   
 ## 环境说明
 * 测试环境1 host c1openapi.hairongyi.com:443
 * 测试环境2 host c2openapi.hairongyi.com:443
