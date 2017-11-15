@@ -19,7 +19,9 @@
    *  run MainApp的main方法 
    
 ## 环境说明
-* 测试环境 host c1openapi.hairongyi.com:443
+* 测试环境1 host c1openapi.hairongyi.com:443
+* 测试环境2 host c2openapi.hairongyi.com:443
+* 测试环境3 host c3openapi.hairongyi.com:443
 * 准生产环境 host zopenapi.hairongyi.com:443
 * 生产环境 host openapi.hairongyi.com:443   
    
